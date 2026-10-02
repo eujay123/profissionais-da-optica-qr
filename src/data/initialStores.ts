@@ -47,7 +47,7 @@ export const initialStores: Store[] = [
     whatsapp: '258846899729',
     whatsappMessage: 'Olá! Vim pelo QR Code da Profissionais da Óptica (Filial Sede). Gostaria de atendimento.',
     examWhatsappMessage: 'Olá! Gostaria de agendar exame de vista na Profissionais da Óptica (Filial Sede Av. 24 de Julho).',
-    email: 'sede@profissionaisdaoptica.co.mz',
+    email: 'profissionaisdaoptica@hotmail.com',
     googleMapsUrl: 'https://www.google.com/maps/place/Profissionais+da+%C3%93ptica+-+Sede/@-25.9651049,32.5726299,17z/data=!3m1!4b1!4m6!3m5!1s0x1ee69b563276db7b:0x4956867c3c67db17!8m2!3d-25.9651049!4d32.5726299!16s%2Fg%2F11sxy9sr5x',
     coordinates: {
       lat: -25.9651049,
@@ -67,13 +67,8 @@ export const initialStores: Store[] = [
       'Ajuste e Manutenção Gratuita',
     ],
     social: {
-      instagram: '@profissionaisdaoptica',
+      instagram: '@prof.optica',
       facebook: 'profissionaisdaoptica',
-    },
-    wifi: {
-      ssid: 'ProfissionaisDaOptica_Sede',
-      password: 'optica_garantia',
-      encryption: 'WPA',
     },
     activeQrTarget: 'landing',
     qrStyle: {
@@ -108,7 +103,7 @@ export const initialStores: Store[] = [
     whatsapp: '258848181553',
     whatsappMessage: 'Olá! Vim pelo QR Code da Profissionais da Óptica (Filial Shopping 24). Gostaria de atendimento.',
     examWhatsappMessage: 'Olá! Gostaria de agendar exame de vista na Profissionais da Óptica (Filial Shopping 24).',
-    email: 'shopping24@profissionaisdaoptica.co.mz',
+    email: 'profissionaisdaoptica@hotmail.com',
     rating: {
       score: 5.0,
       count: 2,
@@ -129,12 +124,7 @@ export const initialStores: Store[] = [
       'Ajuste Gratuito de Óculos',
     ],
     social: {
-      instagram: '@profissionaisdaoptica',
-    },
-    wifi: {
-      ssid: 'Optica_Shopping24',
-      password: 'optica24julho',
-      encryption: 'WPA',
+      instagram: '@prof.optica',
     },
     activeQrTarget: 'landing',
     qrStyle: {
@@ -169,7 +159,7 @@ export const initialStores: Store[] = [
     whatsapp: '25821320611',
     whatsappMessage: 'Olá! Vim pelo QR Code da Profissionais da Óptica (Filial Pandora).',
     examWhatsappMessage: 'Olá! Quero marcar exame de vista na Profissionais da Óptica (Filial Pandora).',
-    email: 'pandora@profissionaisdaoptica.co.mz',
+    email: 'profissionaisdaoptica@hotmail.com',
     googleMapsUrl: 'https://www.google.com/maps/place/Profissionais+da+%C3%B3ptica+-+Pandora/@-25.9663496,32.5798007,17z/data=!3m1!4b1!4m6!3m5!1s0x1ee69b64567d8ddb:0x97a6bed45eb0b756!8m2!3d-25.9663496!4d32.5798007!16s%2Fg%2F11n127_dk1',
     coordinates: {
       lat: -25.9663496,
@@ -186,7 +176,7 @@ export const initialStores: Store[] = [
       'Lentes Digitais de Alta Precisão',
     ],
     social: {
-      instagram: '@profissionaisdaoptica',
+      instagram: '@prof.optica',
     },
     activeQrTarget: 'landing',
     qrStyle: {
@@ -221,7 +211,7 @@ export const initialStores: Store[] = [
     whatsapp: '258845424776',
     whatsappMessage: 'Olá! Vim pelo QR Code da Profissionais da Óptica (Filial 25 de Setembro).',
     examWhatsappMessage: 'Olá! Desejo agendar consulta/exame de vista na Filial 25 de Setembro.',
-    email: '25setembro@profissionaisdaoptica.co.mz',
+    email: 'profissionaisdaoptica@hotmail.com',
     googleMapsUrl: 'https://www.google.com/maps/place/Profissionais+da+%C3%93ptica+25+de+Setembro/@-25.9713164,32.5683986,17z/data=!3m1!4b1!4m6!3m5!1s0x1ee69be325cee95f:0xa10f3cf8a1767d4f!8m2!3d-25.9713164!4d32.5683986!16s%2Fg%2F11ll_mfp8r',
     coordinates: {
       lat: -25.9713164,
@@ -238,7 +228,7 @@ export const initialStores: Store[] = [
       'Ajuste e Reparos Rápidos',
     ],
     social: {
-      instagram: '@profissionaisdaoptica',
+      instagram: '@prof.optica',
     },
     activeQrTarget: 'landing',
     qrStyle: {
@@ -273,7 +263,7 @@ export const initialStores: Store[] = [
     whatsapp: '258851790978',
     whatsappMessage: 'Olá! Vim pelo QR Code da Profissionais da Óptica (Filial Polana Plaza).',
     examWhatsappMessage: 'Olá! Gostaria de agendar exame de vista na Profissionais da Óptica (Filial Polana Plaza).',
-    email: 'polanaplaza@profissionaisdaoptica.co.mz',
+    email: 'profissionaisdaoptica@hotmail.com',
     googleMapsUrl: 'https://www.google.com/maps/place/Profissionais+da+%C3%B3ptica+-+Polana+Plaza/@-25.9763517,32.5924149,17z/data=!3m1!4b1!4m6!3m5!1s0x1ee69b001cab56a9:0x8902dbb29c11dc9!8m2!3d-25.9763517!4d32.5924149!16s%2Fg%2F11xysnf5my',
     coordinates: {
       lat: -25.9763517,
@@ -290,7 +280,7 @@ export const initialStores: Store[] = [
       'Lentes de Contato',
     ],
     social: {
-      instagram: '@profissionaisdaoptica',
+      instagram: '@prof.optica',
     },
     activeQrTarget: 'landing',
     qrStyle: {
@@ -325,7 +315,7 @@ export const initialStores: Store[] = [
     whatsapp: '258842889988',
     whatsappMessage: 'Olá! Vim pelo QR Code da Profissionais da Óptica (Filial Baía Mall).',
     examWhatsappMessage: 'Olá! Desejo marcar exame de vista na Profissionais da Óptica (Filial Baía Mall).',
-    email: 'baiamall@profissionaisdaoptica.co.mz',
+    email: 'profissionaisdaoptica@hotmail.com',
     rating: {
       score: 4.0,
       count: 4,
@@ -347,7 +337,7 @@ export const initialStores: Store[] = [
       'Atendimento aos Domingos e Feriados',
     ],
     social: {
-      instagram: '@profissionaisdaoptica',
+      instagram: '@prof.optica',
     },
     activeQrTarget: 'landing',
     qrStyle: {

@@ -7,7 +7,6 @@ import {
   saveChainSettings,
   resetToDemoData,
 } from './utils/storage';
-import { getStoreOpenStatus } from './utils/hours';
 import { Navbar } from './components/Navbar';
 import { StoreList } from './components/StoreList';
 import { StoreFormModal } from './components/StoreFormModal';
@@ -16,16 +15,24 @@ import { PrintPlacardModal } from './components/PrintPlacardModal';
 import { StoreLandingPage } from './components/StoreLandingPage';
 import { BatchImportExportModal } from './components/BatchImportExportModal';
 import { NetworkSettingsModal } from './components/NetworkSettingsModal';
+import { AdminAuthModal } from './components/AdminAuthModal';
+import { InstagramIcon } from './components/SocialIcons';
 import {
-  Store as StoreIcon,
-  MapPin,
-  Clock,
-  QrCode,
+  Plus,
+  Mail,
+  Sliders,
+  Download,
+  ShieldCheck,
+  LogOut,
 } from 'lucide-react';
 
 export function App() {
   const [stores, setStores] = useState<Store[]>(() => loadStores());
   const [chainSettings, setChainSettings] = useState<ChainSettings>(() => loadChainSettings());
+
+  // Controle de Acesso Restrito do Jonas (Senha: jonas123)
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
+  const [isAdminAuthModalOpen, setIsAdminAuthModalOpen] = useState(false);
 
   // Modais e Estados de Visualização
   const [editingStore, setEditingStore] = useState<Store | null>(null);
@@ -67,7 +74,6 @@ export function App() {
           store={foundStore}
           isStandalone={true}
           onBackToAdmin={() => {
-            // Remove o parâmetro da URL para voltar à administração
             window.history.replaceState({}, '', window.location.pathname);
             setPublicStoreId(null);
           }}
@@ -76,7 +82,7 @@ export function App() {
     }
   }
 
-  // Se o admin clicou em "Ver Mobile" para simular o smartphone do cliente
+  // Se clicou em "Ver Mobile" para simular o smartphone do cliente
   if (previewingMobileStore) {
     return (
       <StoreLandingPage
@@ -112,8 +118,8 @@ export function App() {
     const newStore: Store = {
       ...store,
       id: `loja-${Date.now()}`,
-      code: `${store.code}-COPIA`,
-      name: `${store.name} (Nova)`,
+      code: `${store.code}-NOVA`,
+      name: `${store.name} (Cópia)`,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
@@ -138,81 +144,73 @@ export function App() {
     handleUpdateStores(finalStores);
   };
 
-  // Redefinir para dados de teste
+  // Redefinir para dados oficiais
   const handleResetDemo = () => {
     const reset = resetToDemoData();
     setStores(reset.stores);
     setChainSettings(reset.settings);
   };
 
-  // Métricas rápidas da rede
-  const openStoresCount = stores.filter((s) => getStoreOpenStatus(s.hours).isOpen).length;
-  const uniqueCities = new Set(stores.map((s) => s.address.city).filter(Boolean)).size;
-
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
+    <div className="min-h-screen bg-[#FAF7F2] text-stone-900 flex flex-col font-sans selection:bg-red-100 selection:text-red-900">
       
-      {/* Top Navbar */}
+      {/* Top Navbar Minimalista */}
       <Navbar
         chainSettings={chainSettings}
-        totalStores={stores.length}
-        onAddNew={() => setIsNewStoreModalOpen(true)}
-        onOpenBatch={() => setIsBatchModalOpen(true)}
-        onOpenSettings={() => setIsSettingsModalOpen(true)}
+        isAdminAuthenticated={isAdminAuthenticated}
+        onExitAdmin={() => setIsAdminAuthenticated(false)}
       />
 
-      {/* Conteúdo Principal */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-6">
-        
-        {/* Banner de Estatísticas da Rede */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          
-          <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
-              <StoreIcon className="w-6 h-6" />
+      {/* Painel Administrativo do Jonas (Apenas quando autenticado por senha) */}
+      {isAdminAuthenticated && (
+        <div className="bg-stone-900 text-white border-b border-stone-800 py-2.5 px-4 animate-in slide-in-from-top duration-200">
+          <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-emerald-400" />
+              <span className="font-semibold text-stone-200">Modo de Gestão Ativo (Jonas)</span>
             </div>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Total de Filiais</p>
-              <p className="text-2xl font-black text-slate-900 mt-0.5">{stores.length}</p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-              <Clock className="w-6 h-6" />
-            </div>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Abertas Agora</p>
-              <p className="text-2xl font-black text-slate-900 mt-0.5">{openStoresCount} filiais</p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-              <MapPin className="w-6 h-6" />
-            </div>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Cidades Atendidas</p>
-              <p className="text-2xl font-black text-slate-900 mt-0.5">{uniqueCities} cidades</p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
-              <QrCode className="w-6 h-6" />
-            </div>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">QR Codes Ativos</p>
-              <p className="text-2xl font-black text-slate-900 mt-0.5">{stores.length} gerados</p>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setIsNewStoreModalOpen(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-xs transition"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                Nova Filial
+              </button>
+              <button
+                onClick={() => setIsBatchModalOpen(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-lg transition"
+              >
+                <Download className="w-3.5 h-3.5" />
+                Importar/Exportar Lote
+              </button>
+              <button
+                onClick={() => setIsSettingsModalOpen(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-lg transition"
+              >
+                <Sliders className="w-3.5 h-3.5" />
+                Configurar Rede
+              </button>
+              <button
+                onClick={() => setIsAdminAuthenticated(false)}
+                className="inline-flex items-center gap-1 px-2.5 py-1.5 text-stone-400 hover:text-white transition ml-2"
+                title="Sair do modo administrador"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+              </button>
             </div>
           </div>
-
         </div>
+      )}
 
-        {/* Lista e Gestão das Lojas */}
+      {/* Conteúdo Principal Limpo e Mobile First */}
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-1 w-full space-y-6">
+        
+        {/* Gestão e Visualização das Filiais */}
         <StoreList
           stores={stores}
           productionBaseUrl={chainSettings.productionBaseUrl}
+          isAdminAuthenticated={isAdminAuthenticated}
           onAddNew={() => setIsNewStoreModalOpen(true)}
           onEdit={(store) => setEditingStore(store)}
           onDelete={handleDeleteStore}
@@ -224,12 +222,67 @@ export function App() {
 
       </main>
 
-      {/* Rodapé do Painel */}
-      <footer className="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-400 no-print">
-        <p>
-          © {new Date().getFullYear()} {chainSettings.brandName} • Plataforma de QR Codes, Localização e Contatos para Redes de Lojas
-        </p>
+      {/* Rodapé Elegante com Contatos Oficiais e Botão '+' Discreto */}
+      <footer className="bg-white/80 backdrop-blur-xs border-t border-[#EAE4D7] py-6 sm:py-8 px-4 text-center text-xs text-stone-500 no-print">
+        <div className="max-w-4xl mx-auto space-y-3">
+          
+          {/* Canais Oficiais da Rede */}
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-medium">
+            <a
+              href="https://instagram.com/prof.optica"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 text-stone-600 hover:text-pink-600 transition"
+            >
+              <InstagramIcon className="w-4 h-4 text-pink-600" />
+              <span>@prof.optica</span>
+            </a>
+
+            <span className="text-stone-300">•</span>
+
+            <a
+              href="mailto:profissionaisdaoptica@hotmail.com"
+              className="inline-flex items-center gap-1.5 text-stone-600 hover:text-red-600 transition"
+            >
+              <Mail className="w-4 h-4 text-red-600" />
+              <span>profissionaisdaoptica@hotmail.com</span>
+            </a>
+          </div>
+
+          {/* Copyright e Acesso Discreto do Jonas */}
+          <div className="flex items-center justify-center gap-2 pt-2 text-stone-400 text-[11px]">
+            <span>© {new Date().getFullYear()} {chainSettings.brandName} • Maputo, Moçambique</span>
+            
+            {/* Botão '+' Discreto para Acesso por Senha (jonas123) */}
+            <button
+              onClick={() => {
+                if (isAdminAuthenticated) {
+                  setIsNewStoreModalOpen(true);
+                } else {
+                  setIsAdminAuthModalOpen(true);
+                }
+              }}
+              className="w-5 h-5 flex items-center justify-center rounded-full text-stone-300 hover:text-stone-600 hover:bg-stone-200/50 transition opacity-60 hover:opacity-100"
+              title="Acesso de Gestão"
+              aria-label="Acesso de Gestão"
+            >
+              <Plus className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+        </div>
       </footer>
+
+      {/* Modal de Senha do Jonas (jonas123) */}
+      <AdminAuthModal
+        isOpen={isAdminAuthModalOpen}
+        onClose={() => setIsAdminAuthModalOpen(false)}
+        onSuccess={() => {
+          setIsAdminAuthenticated(true);
+          setIsAdminAuthModalOpen(false);
+          setIsNewStoreModalOpen(true);
+        }}
+      />
 
       {/* Modais do Sistema */}
       {(isNewStoreModalOpen || editingStore) && (

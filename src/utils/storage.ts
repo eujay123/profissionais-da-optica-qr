@@ -1,14 +1,16 @@
 import type { Store, ChainSettings } from '../types';
 import { initialStores, initialChainSettings } from '../data/initialStores';
 
-const STORES_STORAGE_KEY = 'profissionais_optica_filiais_v5';
-const SETTINGS_STORAGE_KEY = 'profissionais_optica_settings_v5';
+const STORES_STORAGE_KEY = 'profissionais_optica_filiais_v6';
+const SETTINGS_STORAGE_KEY = 'profissionais_optica_settings_v6';
 
 export function loadStores(): Store[] {
   try {
     // Limpa versões de cache antigas do navegador para garantir que o usuário veja as 6 filiais
     localStorage.removeItem('qr_multi_stores_data_v1');
     localStorage.removeItem('profissionais_optica_stores_v2');
+    localStorage.removeItem('profissionais_optica_filiais_v5');
+    localStorage.removeItem('profissionais_optica_settings_v5');
 
     const raw = localStorage.getItem(STORES_STORAGE_KEY);
     if (!raw) {

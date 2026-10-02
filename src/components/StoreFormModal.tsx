@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Store } from '../types';
-import { X, Check, Building2, MapPin, Clock, Wifi, Share2, Compass } from 'lucide-react';
+import { X, Check, Building2, MapPin, Clock, Share2, Compass } from 'lucide-react';
 
 interface StoreFormModalProps {
   initialStore?: Store | null;
@@ -144,7 +144,7 @@ export const StoreFormModal: React.FC<StoreFormModalProps> = ({
             { id: 'info', label: 'Dados & Contatos', icon: Building2 },
             { id: 'address', label: 'Endereço & GPS', icon: MapPin },
             { id: 'hours', label: 'Horários de Funcionamento', icon: Clock },
-            { id: 'extras', label: 'Wi-Fi & Redes', icon: Wifi },
+            { id: 'extras', label: 'Canais Digitais', icon: Share2 },
           ].map((tab) => {
             const Icon = tab.icon;
             return (
@@ -508,48 +508,12 @@ export const StoreFormModal: React.FC<StoreFormModalProps> = ({
             </div>
           )}
 
-          {/* Aba 4: Wi-Fi & Redes Sociais */}
+          {/* Aba 4: Canais Oficiais & Redes Sociais */}
           {activeTab === 'extras' && (
             <div className="space-y-4">
-              <div className="bg-purple-50 p-4 rounded-2xl border border-purple-100 space-y-3">
-                <span className="text-xs font-bold uppercase tracking-wider text-purple-700 flex items-center gap-1.5">
-                  <Wifi className="w-3.5 h-3.5" />
-                  Rede Wi-Fi para Clientes na Loja
-                </span>
-                
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-medium text-slate-700 mb-1">
-                      Nome da Rede (SSID)
-                    </label>
-                    <input
-                      type="text"
-                      name="wifiSsid"
-                      value={formData.wifiSsid}
-                      onChange={handleChange}
-                      placeholder="Ex: RedeAlpha_Clientes"
-                      className="w-full text-xs px-3 py-2 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-purple-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-slate-700 mb-1">
-                      Senha do Wi-Fi
-                    </label>
-                    <input
-                      type="text"
-                      name="wifiPass"
-                      value={formData.wifiPass}
-                      onChange={handleChange}
-                      placeholder="Ex: alpha2026"
-                      className="w-full text-xs px-3 py-2 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-purple-500"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-3 pt-2">
+              <div className="space-y-3 pt-1">
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
-                  <Share2 className="w-3.5 h-3.5 text-indigo-600" />
+                  <Share2 className="w-3.5 h-3.5 text-red-600" />
                   Presença Digital da Filial
                 </span>
 
