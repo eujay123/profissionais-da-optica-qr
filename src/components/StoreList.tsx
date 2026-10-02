@@ -56,6 +56,7 @@ export const StoreList: React.FC<StoreListProps> = ({
     return (
       store.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       store.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      store.address.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
       store.address.neighborhood.toLowerCase().includes(searchTerm.toLowerCase())
     );
   });
@@ -76,7 +77,7 @@ export const StoreList: React.FC<StoreListProps> = ({
         <div className="flex items-center justify-between px-2 pb-2">
           <p className="text-[11px] font-bold uppercase tracking-wider text-stone-600 flex items-center gap-1.5">
             <StoreIcon className="w-3.5 h-3.5 text-red-600" />
-            Filiais em Maputo
+            Rede de Filiais (Moçambique)
           </p>
           <div className="flex items-center gap-1">
             <button
@@ -252,7 +253,7 @@ export const StoreList: React.FC<StoreListProps> = ({
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Buscar filial por nome ou bairro em Maputo..."
+              placeholder="Buscar filial por cidade, nome ou bairro..."
               className="w-full pl-10 pr-4 py-2.5 text-xs bg-white border border-[#EAE4D7] rounded-full focus:outline-hidden focus:ring-2 focus:ring-red-600 transition shadow-xs placeholder:text-stone-400"
             />
           </div>

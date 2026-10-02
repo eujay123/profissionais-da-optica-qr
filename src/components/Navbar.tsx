@@ -33,7 +33,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               </h1>
               <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-red-50 text-red-700 border border-red-200">
                 <Sparkles className="w-2.5 h-2.5 mr-1 text-red-600" />
-                Maputo
+                Moçambique
               </span>
             </div>
             <p className="text-[11px] text-stone-500 font-medium">
