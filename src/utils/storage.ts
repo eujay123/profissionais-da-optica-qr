@@ -53,7 +53,12 @@ export function loadChainSettings(): ChainSettings {
       saveChainSettings(initialChainSettings);
       return initialChainSettings;
     }
-    return JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    return {
+      ...initialChainSettings,
+      ...parsed,
+      productionBaseUrl: parsed.productionBaseUrl || initialChainSettings.productionBaseUrl,
+    };
   } catch (err) {
     console.error('Erro ao ler configurações do localStorage:', err);
     return initialChainSettings;

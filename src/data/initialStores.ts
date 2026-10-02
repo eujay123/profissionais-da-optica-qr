@@ -3,7 +3,7 @@ import type { Store, ChainSettings } from '../types';
 export const initialChainSettings: ChainSettings = {
   brandName: 'Profissionais da Óptica',
   tagline: 'Qualidade • Eficiência • Garantia',
-  productionBaseUrl: '', // Preenchido com a URL da Vercel após o deploy
+  productionBaseUrl: 'https://qr-rede-lojas.vercel.app', // URL oficial de produção no Vercel
   defaultLogoUrl: '/logo-symbol.png',
   defaultQrStyle: {
     dotsColor: '#dc2626', // Vermelho oficial vibrante da marca
